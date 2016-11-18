@@ -37,6 +37,7 @@ public class StartSceneMain : MonoBehaviour {
     void StartGame1()
     {
         //Code for starting game1
+
     }
 
     void StartGame2()
