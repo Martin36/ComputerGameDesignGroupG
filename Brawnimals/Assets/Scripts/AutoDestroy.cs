@@ -7,7 +7,7 @@ public class AutoDestroy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		Destroy (this.gameObject, time);
+		Destroy (gameObject, time);
 	}
 	
 	// Update is called once per frame

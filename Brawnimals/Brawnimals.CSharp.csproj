@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\CharacterControls.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\Level1Spikes.cs" />
+    <Compile Include="Assets\Scripts\Micro Game\SpamTapGameScript.cs" />
     <Compile Include="Assets\Scripts\Spike.cs" />
     <Compile Include="Assets\Scripts\SpikeCreator.cs" />
     <Compile Include="Assets\Scripts\StartMenu.cs" />
