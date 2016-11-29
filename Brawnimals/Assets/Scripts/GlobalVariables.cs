@@ -8,11 +8,11 @@ public class GlobalVariables : MonoBehaviour {
 	public static int numPlayers=4;
 
 
-	//to know which controller pertain to each player
-	public static int controllerP1 = 0;    //wasd
-	public static int controllerP2 = 1;    //Arrows
-	public static int controllerP3 = 2;    //Gamepad
-	public static int controllerP4 = 3;    //Mouse 
+	//to know which controller pertain to each player 0 = wasd, 1 = Arrows, 2 = Gamepad, 3 = Mouse
+	public static int controllerP1 = 0;    //Chicken player
+	public static int controllerP2 = 1;    //Sheep player
+	public static int controllerP3 = 2;    //Cow player
+	public static int controllerP4 = 3;    //Mouse player
 
 	//Global scores for players
 	public static int globalScoreP1 = 0;
