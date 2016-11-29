@@ -46,6 +46,11 @@ namespace UnityStandardAssets._2D
 							m_Jump = true;
 						}
 						break;
+					case 4:
+
+					m_Jump = Input.GetButtonDown ("A");
+
+					break;
 				}
 
 
@@ -101,6 +106,12 @@ namespace UnityStandardAssets._2D
 						h = 1;
 					}
 					break;
+				case 4:
+
+					//h = Input.GetAxis("JoystickX");
+					h = Input.GetAxis("JoystickX6th");
+
+				break;
 			}
 
 
