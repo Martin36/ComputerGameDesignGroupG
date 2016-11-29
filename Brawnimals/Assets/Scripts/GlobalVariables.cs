@@ -3,13 +3,42 @@ using System.Collections;
 
 public class GlobalVariables : MonoBehaviour {
 
+
+	//the number of players "alive" on the game, be care if you modify that variable, I do in some games. Before every game should be reset it properly
 	public static int numPlayers=4;
 
-	public static int controller1 = 0;    //wasd
-	public static int controller2 = 1;    //Arrows
-	public static int controller3 = 2;    //Gamepad
-	public static int controller4 = 3;    //Mouse 
 
+	//to know which controller pertain to each player
+	public static int controllerP1 = 0;    //wasd
+	public static int controllerP2 = 1;    //Arrows
+	public static int controllerP3 = 2;    //Gamepad
+	public static int controllerP4 = 3;    //Mouse 
+
+	//Global scores for players
+	public static int globalScoreP1 = 0;
+	public static int globalScoreP2 = 0;
+	public static int globalScoreP3 = 0;
+	public static int globalScoreP4 = 0;
+
+	//Last game scores for players
+	public static int lastGameScoreP1 = 0;
+	public static int lastGameScoreP2 = 0;
+	public static int lastGameScoreP3 = 0;
+	public static int lastGameScoreP4 = 0;
+
+	//Variable to control the change of spawning a new Microgame, should be reset after a microgame spawned
+	public static int microGameChance = 0;
+
+
+
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//we cannot use NON-static variables, this script will not be instantiated in any object, it just remains in the project folder and it works
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
 	[HideInInspector]
 	public int[] controllers = new int[numPlayers];			//The index in the array corresponds to the controller with that number and the valuse is the player
 	[HideInInspector]
@@ -26,5 +55,7 @@ public class GlobalVariables : MonoBehaviour {
 		{
 			controllers[i] = i;
 		}
-	}
+	}*/
+
+
 }
