@@ -21,13 +21,15 @@ public class TreeGameScript : MonoBehaviour {
 	private int[] controllers;					//Reference to the controllers, as given by the global variables
 	private int[] score;                //The score counter, the index corresponds to the player number (i.e. index 0 means player 1)
 	private int winner;									//The number of the player that has won
-	private string[] buttonNames;				//The names of the buttons the player has (should be changed later)
-	
+	private string[] buttonNames;       //The names of the buttons the player has (should be changed later)
+	private bool gameOver;
 
 	void Awake()
 	{
 		gv = GameObject.Find("GlobalVariables").GetComponent<GlobalVariables>();
 		controllers = gv.controllers;
+
+		buttonToPress = GameObject.FindGameObjectWithTag("ButtonPress").GetComponent<Text>();
 
 		scoreDisplays = new List<Text>();
 		foreach(Transform child in transform)
@@ -52,50 +54,85 @@ public class TreeGameScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		gameOver = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Check for which buttons has been pressed and give players score accordingly
-		if (Input.GetKeyDown(KeyCode.W))
+		if (!gameOver)
 		{
-			//Check which player has these controllers and give him a point
-			int playerID = controllers[GlobalVariables.controller1];
-			score[playerID] += 1;
-			//Update score text (need to add 1 to playerID because of the indexing)
-			scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID+1, score[playerID]);
-			if(score[playerID] == treeStage2)
+			//Check for which buttons has been pressed and give players score accordingly
+			if (Input.GetKeyDown(KeyCode.W))
 			{
-				//TODO: Update the image of the tree to stage 2
+				//Check which player has these controllers and give him a point
+				int playerID = controllers[GlobalVariables.controller1];
+				score[playerID] += 1;
+				//Update score text (need to add 1 to playerID because of the indexing)
+				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
+				if (score[playerID] == treeStage2)
+				{
+					//TODO: Update the image of the tree to stage 2
+				}
+				else if (score[playerID] == treeStage3)
+				{
+					//TODO: Update the image of the tree to stage 3
+				}
+				else if (score[playerID] >= winScore)
+				{
+					//This player has won
+					winner = playerID;
+					GameFinished();
+				}
 			}
-			else if(score[playerID] == treeStage3)
+			if (Input.GetKeyDown(KeyCode.UpArrow))
 			{
-				//TODO: Update the image of the tree to stage 3
+				int playerID = controllers[GlobalVariables.controller2];
+				score[playerID] += 1;
+				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
+				if (score[playerID] == treeStage2)
+				{
+					//TODO: Update the image of the tree to stage 2
+				}
+				else if (score[playerID] == treeStage3)
+				{
+					//TODO: Update the image of the tree to stage 3
+				}
+				else if (score[playerID] >= winScore)
+				{
+					//This player has won
+					winner = playerID;
+					GameFinished();
+				}
 			}
-			else if(score[playerID] >= winScore)
+			//TODO: Insert check for the gamepad
+			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
-				//This player has won
+				int playerID = controllers[GlobalVariables.controller4];
+				score[playerID] += 1;
+				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
+				if (score[playerID] == treeStage2)
+				{
+					//TODO: Update the image of the tree to stage 2
+				}
+				else if (score[playerID] == treeStage3)
+				{
+					//TODO: Update the image of the tree to stage 3
+				}
+				else if (score[playerID] >= winScore)
+				{
+					//This player has won
+					winner = playerID;
+					GameFinished();
+				}
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			int playerID = controllers[GlobalVariables.controller2];
-			score[playerID] += 1;
-			scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID+1, score[playerID]);
-		}
-		//TODO: Insert check for the gamepad
-		if (Input.GetKeyDown(KeyCode.Mouse0))
-		{
-			int playerID = controllers[GlobalVariables.controller4];
-			score[playerID] += 1;
-			scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID+1, score[playerID]);
-		}
-
 	}
 
 	void GameFinished()
 	{
 		//Announce the winner and go to the global/local score screen
+		gameOver = true;
+		buttonToPress.text = string.Format("Player {0} won!", winner + 1);
+		Time.timeScale = 0;
 	}
 }
