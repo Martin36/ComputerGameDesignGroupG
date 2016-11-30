@@ -34,7 +34,7 @@ public class CharacterColliders : MonoBehaviour
 					break;
 			}
 			GlobalVariables.numPlayers -= 1;
-			Destroy(other.gameObject);
+			//Destroy(other.gameObject);
 			Destroy(this.gameObject);
 		}
 	}
