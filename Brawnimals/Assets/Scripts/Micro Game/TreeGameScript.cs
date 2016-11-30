@@ -8,6 +8,9 @@ public class TreeGameScript : MonoBehaviour {
 	//First randomize a button for the players to press (20 times to start with)
 	//Second: Make listners for the player inputs
 
+	//TODO: Randomize the number of times the players has to hit the tree before it breaks
+	//then the 3 different stages will have to depend on that number
+
 	public GameObject[] trees = new GameObject[4];          //The sprite images for the trees
 	public bool randomizeButton = false;    //If true then randomize the button to press
 	public int winScore = 20;          //The number of times to press the button before the tree breaks
