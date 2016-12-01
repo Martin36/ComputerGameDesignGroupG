@@ -108,7 +108,7 @@ public class RouletteGameScript : MonoBehaviour {
 	{
 		GameObject gun = guns[playerID];
 		//Check if the shot was fired in the right interval
-		if(gun.transform.rotation.z > shootingRange.y || gun.transform.rotation.z < shootingRange.x)
+		if(gun.transform.rotation.eulerAngles.z <= shootingRange.y && gun.transform.rotation.eulerAngles.z >= shootingRange.x)
 		{
 			//TODO: Add some animation for the shooting
 			scoreDisplays[playerID].text = string.Format("Score: {0}", ++scores[playerID]);
