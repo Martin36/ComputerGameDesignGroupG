@@ -97,8 +97,13 @@ public class RouletteGameScript : MonoBehaviour {
 				int playerID = controllers[2];
 				Shot(playerID);
 			}
+			rotationSpeed += rotationAcc * Time.deltaTime;
+			if(playersLeft <= 0)
+			{
+				//The game is done
+				GameOver();
+			}
 		}
-		rotationSpeed += rotationAcc * Time.deltaTime;
 	}
 	/// <summary>
 	/// Call this when player has shot
@@ -131,4 +136,11 @@ public class RouletteGameScript : MonoBehaviour {
 		}
 	}
 
+	void GameOver()
+	{
+		//TODO: Add some score list to show
+		gameOver = true;
+		Time.timeScale = 0f;
+
+	}
 }
