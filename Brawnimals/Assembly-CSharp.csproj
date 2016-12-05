@@ -55,6 +55,8 @@
      <Compile Include="Assets\Scripts\GlobalVariables.cs" />
      <Compile Include="Assets\Scripts\ItemsGeneration.cs" />
      <Compile Include="Assets\Scripts\Level1Spikes.cs" />
+     <Compile Include="Assets\Scripts\Micro Game\BloodBalloonScript.cs" />
+     <Compile Include="Assets\Scripts\Micro Game\RouletteGameScript.cs" />
      <Compile Include="Assets\Scripts\Micro Game\TreeGameScript.cs" />
      <Compile Include="Assets\Scripts\Platformer2DUserControl.cs" />
      <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
