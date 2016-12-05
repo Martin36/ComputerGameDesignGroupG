@@ -2,12 +2,14 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ResultsScript : MonoBehaviour {
 
 	public int nrOfPlayers = 4;
 	public int maxScore = 100;
 	public int fillTime = 5;
+	public int delay = 6;			//The time before next scene is loaded
 	public bool globalScore = false;		//Set this true if the global score is needed
 	
 
@@ -67,6 +69,9 @@ public class ResultsScript : MonoBehaviour {
 			string newText = oldText + ' ' + scores[i];
 			scoreDisplays[i].text = newText;
 		}
+
+		//Set timer for changing screen
+		StartCoroutine(LoadLevelAfterDelay());
 	}
 	
 	void Update () {
@@ -75,18 +80,31 @@ public class ResultsScript : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			//Add the last game scores to the globals
-			GlobalVariables.globalScoreP1 += GlobalVariables.lastGameScoreP1;
-			GlobalVariables.globalScoreP2 += GlobalVariables.lastGameScoreP2;
-			GlobalVariables.globalScoreP3 += GlobalVariables.lastGameScoreP3;
-			GlobalVariables.globalScoreP4 += GlobalVariables.lastGameScoreP4;
-			//Reset the last game scores
-			GlobalVariables.lastGameScoreP1 = 0;
-			GlobalVariables.lastGameScoreP2 = 0;
-			GlobalVariables.lastGameScoreP3 = 0;
-			GlobalVariables.lastGameScoreP4 = 0;
+			StoreData();
 			//Load the game roulette screen for starting a new game
 			SceneManager.LoadScene("GameRoulette");
 		}
+	}
+
+	IEnumerator LoadLevelAfterDelay()
+	{
+		yield return new WaitForSeconds(delay);
+		StoreData();
+		//Load the game roulette screen for starting a new game
+		SceneManager.LoadScene("GameRoulette");
+	}
+
+	void StoreData()
+	{
+		//Add the last game scores to the globals
+		GlobalVariables.globalScoreP1 += GlobalVariables.lastGameScoreP1;
+		GlobalVariables.globalScoreP2 += GlobalVariables.lastGameScoreP2;
+		GlobalVariables.globalScoreP3 += GlobalVariables.lastGameScoreP3;
+		GlobalVariables.globalScoreP4 += GlobalVariables.lastGameScoreP4;
+		//Reset the last game scores
+		GlobalVariables.lastGameScoreP1 = 0;
+		GlobalVariables.lastGameScoreP2 = 0;
+		GlobalVariables.lastGameScoreP3 = 0;
+		GlobalVariables.lastGameScoreP4 = 0;
 	}
 }

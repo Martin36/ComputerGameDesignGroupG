@@ -122,7 +122,6 @@ public class RouletteGameScript : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(KeyCode.Return))
 			{
-				//TODO: Load the results screen
 				SceneManager.LoadScene("ResultsLocal");
 			}
 		}

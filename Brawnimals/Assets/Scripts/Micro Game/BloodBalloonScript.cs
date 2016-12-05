@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class BloodBalloonScript : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class BloodBalloonScript : MonoBehaviour {
 	public int maxTime = 10;   //The max time for the balloon to explode, in sec
 	public int minTime = 3;   //The min time for the balloon to explode
 	public int nrOfPlayers = 4;
+	public int scoreInterval = 5;			//The range between the scores, so for 5 means (5, 10, 15, 20) points
 	public float growingSpeed = 2; //The speed in which the balloon grows (should be used to scale the image)
 
 	private GameObject balloon;
@@ -153,6 +155,13 @@ public class BloodBalloonScript : MonoBehaviour {
 				}
 			}
 		}
+		else
+		{
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				SceneManager.LoadScene("ResultsLocal");
+			}
+		}
 	}
 	/// <summary>
 	/// Call this when the player has pressed a button
@@ -176,7 +185,6 @@ public class BloodBalloonScript : MonoBehaviour {
 	/// <param name="playerID"></param>
 	void Explode(int playerID)
 	{
-		//TODO: Add some animation for the player exploding
 		if(players[playerID] != null)
 		{
 			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
@@ -198,6 +206,34 @@ public class BloodBalloonScript : MonoBehaviour {
 
 		//Create a score list
 		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3}",	place.Select(x => x.ToString()).ToArray());
-	//	Time.timeScale = 0f;
+
+		//Set the last game scores
+		for(int i = 0; i < nrOfPlayers; i++)
+		{
+			int score;
+			if (place[i].Equals("Disqualified"))
+				score = 0;
+			else
+			{
+				//Give the player who clicked first the highest score 
+				score = scoreInterval * (5 - System.Convert.ToInt32(place[i]));
+			}
+			switch (i)
+			{
+				case 0:
+					GlobalVariables.lastGameScoreP1 = score;
+					break;
+				case 1:
+					GlobalVariables.lastGameScoreP2 = score;
+					break;
+				case 2:
+					GlobalVariables.lastGameScoreP3 = score;
+					break;
+				case 3:
+					GlobalVariables.lastGameScoreP4 = score;
+					break;
+			}
+
+		}
 	}
 }

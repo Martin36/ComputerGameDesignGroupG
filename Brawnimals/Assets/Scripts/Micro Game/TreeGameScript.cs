@@ -11,7 +11,7 @@ public class TreeGameScript : MonoBehaviour {
 	//TODO: Randomize the number of times the players has to hit the tree before it breaks
 	//then the 3 different stages will have to depend on that number
 
-	public GameObject[] trees = new GameObject[4];          //The sprite images for the trees
+	public Image[] trees = new Image[4];          //The sprite images for the trees
 	public bool randomizeButton = false;    //If true then randomize the button to press
 	public int winScore = 20;          //The number of times to press the button before the tree breaks
 	public int treeStage2 = 10;					//When the number of hits equals this number the image for the tree will change
@@ -48,6 +48,7 @@ public class TreeGameScript : MonoBehaviour {
 
 		buttonToPress = GameObject.FindGameObjectWithTag("ButtonPress").GetComponent<Text>();
 
+
 		scoreDisplays = new List<Text>();
 		names = new List<string>();
 
@@ -61,6 +62,11 @@ public class TreeGameScript : MonoBehaviour {
 			}
 		}
 		score = new int[scoreDisplays.Count];
+
+		currentImage = new Image[nrOfPlayers];
+		//Get all the players image components
+		for (int i = 0; i < nrOfPlayers; currentImage[i] = scoreDisplays[i++].transform.GetChild(0).GetComponent<Image>()) ;
+
 		if (randomizeButton)
 		{
 			buttonNames = new string[] { "UP", "LEFT", "RIGHT" };
@@ -115,14 +121,18 @@ public class TreeGameScript : MonoBehaviour {
 		if (score[playerID] == treeStage2)
 		{
 			//TODO: Update the image of the tree to stage 2
+			currentImage[playerID] = trees[1];
 		}
 		else if (score[playerID] == treeStage3)
 		{
 			//TODO: Update the image of the tree to stage 3
+			currentImage[playerID] = trees[2];
 		}
 		else if (score[playerID] >= winScore)
 		{
 			//This player has won
+			//Set image to broken tree
+			currentImage[playerID] = trees[3];
 			winner = playerID;
 			GameFinished();
 		}
