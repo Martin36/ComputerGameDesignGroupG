@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
 /// <summary>
@@ -29,7 +30,17 @@ public class RouletteGameScript : MonoBehaviour {
 
 
 	void Start () {
-		players = GameObject.FindGameObjectsWithTag("Player");
+		players = new GameObject[nrOfPlayers];
+		//Get all the player objects
+		int playerCounter = 0;
+		foreach (Transform child in transform)
+		{
+			if (child.tag.Equals("Player"))
+			{
+				players[playerCounter++] = child.gameObject;
+			}
+		}
+
 		guns = new GameObject[nrOfPlayers];
 		scoreDisplays = new Text[nrOfPlayers];
 		//Get the gun component and give it a random rotation
@@ -112,6 +123,7 @@ public class RouletteGameScript : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.Return))
 			{
 				//TODO: Load the results screen
+				SceneManager.LoadScene("ResultsLocal");
 			}
 		}
 	}
@@ -153,10 +165,21 @@ public class RouletteGameScript : MonoBehaviour {
 
 	void GameOver()
 	{
-		//TODO: Add some score list to show
-		gameOver = true;
-		Time.timeScale = 0f;
+		//Time.timeScale = 0f;
 		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3} \nPress \"enter\" to continue", scores.Select(x => x.ToString()).ToArray());
+		GlobalVariables.lastGameScoreP1 = scores[0];
+		GlobalVariables.lastGameScoreP2 = scores[1];
+		GlobalVariables.lastGameScoreP3 = scores[2];
+		GlobalVariables.lastGameScoreP4 = scores[3];
+		if (debug)
+		{
+			GlobalVariables.lastGameScoreP1 = 75;
+			GlobalVariables.lastGameScoreP2 = 50;
+			GlobalVariables.lastGameScoreP3 = 20;
+			GlobalVariables.lastGameScoreP4 = 88;
+		}
+
+		gameOver = true;
 
 	}
 }

@@ -27,8 +27,17 @@ public class BloodBalloonScript : MonoBehaviour {
 	void Awake () {
 
 		balloon = GameObject.FindGameObjectWithTag("Balloon");
+
+		players = new GameObject[nrOfPlayers];
 		//Get all the player objects
-		players = GameObject.FindGameObjectsWithTag("Player");
+		int playerCounter = 0;
+		foreach (Transform child in transform)
+		{
+			if (child.tag.Equals("Player"))
+			{
+				players[playerCounter++] = child.gameObject;
+			}
+		}
 
 		infoText = GetComponentInChildren<Text>();
 		//When the game starts the balloon will not have exploded yet (hopefully)
@@ -189,6 +198,6 @@ public class BloodBalloonScript : MonoBehaviour {
 
 		//Create a score list
 		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3}",	place.Select(x => x.ToString()).ToArray());
-		Time.timeScale = 0f;
+	//	Time.timeScale = 0f;
 	}
 }

@@ -20,11 +20,14 @@ public class GlobalVariables : MonoBehaviour {
 	public static int globalScoreP4 = 0;
 
 	//Last game scores for players
-	public static int lastGameScoreP1 = 0;
-	public static int lastGameScoreP2 = 0;
-	public static int lastGameScoreP3 = 0;
-	public static int lastGameScoreP4 = 0;
+	public static int lastGameScoreP1 = 73;
+	public static int lastGameScoreP2 = 65;
+	public static int lastGameScoreP3 = 50;
+	public static int lastGameScoreP4 = 15;
 
 	//Variable to control the change of spawning a new Microgame, should be reset after a microgame spawned
 	public static int microGameChance = 0;
+
+	//Set this to true if the results scene should display the global score istead of the local one 
+	public static bool globalScores = false;
 }

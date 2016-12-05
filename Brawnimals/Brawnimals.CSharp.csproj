@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Micro Game\TreeGameScript.cs" />
     <Compile Include="Assets\Scripts\Platformer2DUserControl.cs" />
     <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
+    <Compile Include="Assets\Scripts\Progress.cs" />
     <Compile Include="Assets\Scripts\ResultsScript.cs" />
     <Compile Include="Assets\Scripts\Spike.cs" />
     <Compile Include="Assets\Scripts\SpikeCreator.cs" />
