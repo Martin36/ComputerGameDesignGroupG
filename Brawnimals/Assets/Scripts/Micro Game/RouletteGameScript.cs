@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 /// <summary>
 /// The player has to shoot when the bullet is pointing towards the player
 /// Otherwise the character will explode
@@ -72,30 +73,32 @@ public class RouletteGameScript : MonoBehaviour {
 				}
 			}
 			//Chech for shooting
+			int playerID = 5;			//Use 5 as default if nobody pressed
 			if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
 			{
-				int playerID = controllers[0];
-				Shot(playerID);
+				playerID = controllers[0];
 			}
 			if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow))
 			{
-				int playerID = controllers[1];
-				Shot(playerID);
+				playerID = controllers[1];
 			}
 			if (Input.GetButtonDown("A"))
 			{
-				int playerID = controllers[2];
-				Shot(playerID);
+				playerID = controllers[2];
 			}
 			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
 			{
-				int playerID = controllers[3];
-				Shot(playerID);
+				playerID = controllers[3];
 			}
 			if (debug && Input.GetKeyDown(KeyCode.I))
 			{
-				int playerID = controllers[2];
-				Shot(playerID);
+				playerID = controllers[2];
+			}
+			
+			if(playerID != 5 && players[playerID])
+			{
+				//If an alive player shot, then shoot
+				Shoot(playerID);
 			}
 			rotationSpeed += rotationAcc * Time.deltaTime;
 			if(playersLeft <= 0)
@@ -104,24 +107,35 @@ public class RouletteGameScript : MonoBehaviour {
 				GameOver();
 			}
 		}
+		else
+		{
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				//TODO: Load the results screen
+			}
+		}
 	}
 	/// <summary>
 	/// Call this when player has shot
 	/// </summary>
 	/// <param name="playerID"></param>
-	void Shot(int playerID)
+	void Shoot(int playerID)
 	{
 		GameObject gun = guns[playerID];
-		//Check if the shot was fired in the right interval
-		if(gun.transform.rotation.eulerAngles.z <= shootingRange.y && gun.transform.rotation.eulerAngles.z >= shootingRange.x)
+		//Check if player still alive
+		if (gun)
 		{
-			//TODO: Add some animation for the shooting
-			scoreDisplays[playerID].text = string.Format("Score: {0}", ++scores[playerID]);
-		}
-		else
-		{
-			//If the player misses he explodes
-			Explode(playerID);
+			//Check if the shot was fired in the right interval
+			if (gun.transform.rotation.eulerAngles.z <= shootingRange.y && gun.transform.rotation.eulerAngles.z >= shootingRange.x)
+			{
+				//TODO: Add some animation for the shooting
+				scoreDisplays[playerID].text = string.Format("Score: {0}", ++scores[playerID]);
+			}
+			else
+			{
+				//If the player misses he explodes
+				Explode(playerID);
+			}
 		}
 	}
 
@@ -131,6 +145,7 @@ public class RouletteGameScript : MonoBehaviour {
 		if (players[playerID] != null)
 		{
 			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
+			scoreDisplays[playerID].transform.SetParent(transform); //Remove the player as parent to keep the score display
 			Destroy(players[playerID]);
 			playersLeft -= 1;
 		}
@@ -141,6 +156,7 @@ public class RouletteGameScript : MonoBehaviour {
 		//TODO: Add some score list to show
 		gameOver = true;
 		Time.timeScale = 0f;
+		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3} \nPress \"enter\" to continue", scores.Select(x => x.ToString()).ToArray());
 
 	}
 }

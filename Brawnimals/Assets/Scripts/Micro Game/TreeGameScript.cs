@@ -17,8 +17,10 @@ public class TreeGameScript : MonoBehaviour {
 	public int treeStage2 = 10;					//When the number of hits equals this number the image for the tree will change
 	public int treeStage3 = 15;         //Same as the above but another image
 	public int nrOfPlayers = 4;
+	public int award = 5;								//How many points the winner gets (all the others gets 0)
 
 	private List<Text> scoreDisplays;   //The text boxes to display the score each player has
+	private List<string> names;					//The names of the players
 	private Text buttonToPress;         //The text where is says which button to press
 	private Image[] currentImage;       //The current image to display for the player, will change depending on which how many hits the player has left
 	private int[] controllers;					//The index corresponds to the controller and the value is the player number
@@ -26,9 +28,16 @@ public class TreeGameScript : MonoBehaviour {
 	private int winner;									//The number of the player that has won
 	private string[] buttonNames;       //The names of the buttons the player has (should be changed later)
 	private bool gameOver;
+	private bool debug;
 
 	void Awake()
 	{
+		//Set globals
+		GlobalVariables.lastGameScoreP1 = 0;
+		GlobalVariables.lastGameScoreP2 = 0;
+		GlobalVariables.lastGameScoreP3 = 0;
+		GlobalVariables.lastGameScoreP4 = 0;
+
 		controllers = new int[nrOfPlayers];
 		//Set the controllers
 		controllers[GlobalVariables.controllerP1] = 0;
@@ -40,12 +49,15 @@ public class TreeGameScript : MonoBehaviour {
 		buttonToPress = GameObject.FindGameObjectWithTag("ButtonPress").GetComponent<Text>();
 
 		scoreDisplays = new List<Text>();
+		names = new List<string>();
+
 		foreach(Transform child in transform)
 		{
 			//Add each text to scoreDisplays
 			if (child.tag.Equals("PlayerText"))
 			{
 				scoreDisplays.Add(child.GetComponent<Text>());
+				names.Add(child.gameObject.name);
 			}
 		}
 		score = new int[scoreDisplays.Count];
@@ -58,11 +70,13 @@ public class TreeGameScript : MonoBehaviour {
 			buttonToPress.text = string.Format("Press: {0} button", buttonNames[buttonNr]);
 		}
 
+
 	}
 
 	// Use this for initialization
 	void Start () {
 		gameOver = false;
+		debug = true;
 	}
 	
 	// Update is called once per frame
@@ -74,93 +88,68 @@ public class TreeGameScript : MonoBehaviour {
 			{
 				//Check which player has these controllers and give him a point
 				int playerID = controllers[0];
-				score[playerID] += 1;
-				//Update score text (need to add 1 to playerID because of the indexing)
-				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
-				if (score[playerID] == treeStage2)
-				{
-					//TODO: Update the image of the tree to stage 2
-				}
-				else if (score[playerID] == treeStage3)
-				{
-					//TODO: Update the image of the tree to stage 3
-				}
-				else if (score[playerID] >= winScore)
-				{
-					//This player has won
-					winner = playerID;
-					GameFinished();
-				}
+				GiveScore(playerID);
 			}
 			if (Input.GetKeyDown(KeyCode.UpArrow))
 			{
 				int playerID = controllers[1];
-				score[playerID] += 1;
-				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
-				if (score[playerID] == treeStage2)
-				{
-					//TODO: Update the image of the tree to stage 2
-				}
-				else if (score[playerID] == treeStage3)
-				{
-					//TODO: Update the image of the tree to stage 3
-				}
-				else if (score[playerID] >= winScore)
-				{
-					//This player has won
-					winner = playerID;
-					GameFinished();
-				}
+				GiveScore(playerID);
 			}
-			//TODO: Insert check for the gamepad
-			if(Input.GetButtonDown("A"))
+			if(Input.GetButtonDown("A") || (debug && Input.GetKeyDown(KeyCode.I)))
 			{
 				int playerID = controllers[2];
-				score[playerID] += 1;
-				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
-				if (score[playerID] == treeStage2)
-				{
-					//TODO: Update the image of the tree to stage 2
-				}
-				else if (score[playerID] == treeStage3)
-				{
-					//TODO: Update the image of the tree to stage 3
-				}
-				else if (score[playerID] >= winScore)
-				{
-					//This player has won
-					winner = playerID;
-					GameFinished();
-				}
+				GiveScore(playerID);
 			}
 			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				int playerID = controllers[3];
-				score[playerID] += 1;
-				scoreDisplays[playerID].text = string.Format("Player {0} score: {1}", playerID + 1, score[playerID]);
-				if (score[playerID] == treeStage2)
-				{
-					//TODO: Update the image of the tree to stage 2
-				}
-				else if (score[playerID] == treeStage3)
-				{
-					//TODO: Update the image of the tree to stage 3
-				}
-				else if (score[playerID] >= winScore)
-				{
-					//This player has won
-					winner = playerID;
-					GameFinished();
-				}
+				GiveScore(playerID);
 			}
 		}
+	}
+	void GiveScore(int playerID)
+	{
+		score[playerID] += 1;
+		//Update score text (need to add 1 to playerID because of the indexing)
+		scoreDisplays[playerID].text = string.Format("{0} score: {1}", names[playerID], score[playerID]);
+		if (score[playerID] == treeStage2)
+		{
+			//TODO: Update the image of the tree to stage 2
+		}
+		else if (score[playerID] == treeStage3)
+		{
+			//TODO: Update the image of the tree to stage 3
+		}
+		else if (score[playerID] >= winScore)
+		{
+			//This player has won
+			winner = playerID;
+			GameFinished();
+		}
+
 	}
 
 	void GameFinished()
 	{
 		//Announce the winner and go to the global/local score screen
 		gameOver = true;
-		buttonToPress.text = string.Format("Player {0} won!", winner + 1);
+		buttonToPress.text = string.Format("{0} won!", names[winner]);
+		//Give the winner score
+		switch (winner)
+		{
+			case 0:
+				GlobalVariables.lastGameScoreP1 = award;
+				break;
+			case 1:
+				GlobalVariables.lastGameScoreP2 = award;
+				break;
+			case 2:
+				GlobalVariables.lastGameScoreP3 = award;
+				break;
+			case 3:
+				GlobalVariables.lastGameScoreP4 = award;
+				break;
+		}
 		Time.timeScale = 0;
 	}
 }

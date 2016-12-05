@@ -27,34 +27,4 @@ public class GlobalVariables : MonoBehaviour {
 
 	//Variable to control the change of spawning a new Microgame, should be reset after a microgame spawned
 	public static int microGameChance = 0;
-
-
-
-
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//we cannot use NON-static variables, this script will not be instantiated in any object, it just remains in the project folder and it works
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	[HideInInspector]
-	public int[] controllers = new int[numPlayers];			//The index in the array corresponds to the controller with that number and the valuse is the player
-	[HideInInspector]
-	public int[] globalScoreArray = new int[numPlayers];     //Use ints as score?
-	[HideInInspector]
-	public int[] localScoreArray = new int[numPlayers];
-
-
-	void Awake()
-	{
-		DontDestroyOnLoad(this);
-		//Just for testing, the controllers should be assigned other where
-		for(int i = 0; i < controllers.Length; i++)
-		{
-			controllers[i] = i;
-		}
-	}*/
-
-
 }
