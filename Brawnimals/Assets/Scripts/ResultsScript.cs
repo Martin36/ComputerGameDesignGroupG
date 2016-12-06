@@ -7,7 +7,8 @@ using System.Collections;
 public class ResultsScript : MonoBehaviour {
 
 	public int nrOfPlayers = 4;
-	public int maxScore = 100;
+	public int maxLocalScore = 100;
+	public int maxGlobalScore = 500;
 	public int fillTime = 5;
 	public int delay = 6;			//The time before next scene is loaded
 	public bool globalScore = false;		//Set this true if the global score is needed
@@ -50,7 +51,11 @@ public class ResultsScript : MonoBehaviour {
 
 		fillAmount = new float[nrOfPlayers];
 		//Calculate the amount which is to be filled
-		for (int i = 0; i < nrOfPlayers; fillAmount[i] = (float)scores[i++] / maxScore) ;
+		if(globalScore)
+			for (int i = 0; i < nrOfPlayers; fillAmount[i] = (float)scores[i++] / maxGlobalScore) ;
+		else
+			for (int i = 0; i < nrOfPlayers; fillAmount[i] = (float)scores[i++] / maxLocalScore) ;
+
 
 		blood = new Image[nrOfPlayers];
 		//Get the "blood filling" images

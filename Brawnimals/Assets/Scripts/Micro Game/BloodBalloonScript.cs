@@ -205,7 +205,7 @@ public class BloodBalloonScript : MonoBehaviour {
 		}
 
 		//Create a score list
-		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3}",	place.Select(x => x.ToString()).ToArray());
+		infoText.text = string.Format("Chicken: {0} \nSheep: {1} \nCow: {2} \nMouse: {3} \nPress \"Enter\" to continue",	place.Select(x => x.ToString()).ToArray());
 
 		//Set the last game scores
 		for(int i = 0; i < nrOfPlayers; i++)

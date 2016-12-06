@@ -1,34 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class TreeGameScript : MonoBehaviour {
 
-	//First randomize a button for the players to press (20 times to start with)
-	//Second: Make listners for the player inputs
-
 	//TODO: Randomize the number of times the players has to hit the tree before it breaks
 	//then the 3 different stages will have to depend on that number
+	public struct IntVector2
+	{
+		public int x, y;
 
-	public Image[] trees = new Image[4];          //The sprite images for the trees
+		public IntVector2(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+	}
+
+
+	public Sprite[] treeSprites = new Sprite[4];
+	public IntVector2 winScoreInterval = new IntVector2(10, 40);
 	public bool randomizeButton = false;    //If true then randomize the button to press
+	public bool randomizeWinScore = true;
 	public int winScore = 20;          //The number of times to press the button before the tree breaks
 	public int treeStage2 = 10;					//When the number of hits equals this number the image for the tree will change
 	public int treeStage3 = 15;         //Same as the above but another image
 	public int nrOfPlayers = 4;
-	public int award = 5;								//How many points the winner gets (all the others gets 0)
+	public int award = 5;               //How many points the winner gets (all the others gets 0)
+	public int delay = 5;								//How many seconds before the next screen is auto loaded
+
 
 	private List<Text> scoreDisplays;   //The text boxes to display the score each player has
 	private List<string> names;					//The names of the players
 	private Text buttonToPress;         //The text where is says which button to press
-	private Image[] currentImage;       //The current image to display for the player, will change depending on which how many hits the player has left
+	private Image[] image;							//The current image to display for the player, will change depending on which how many hits the player has left
 	private int[] controllers;					//The index corresponds to the controller and the value is the player number
 	private int[] score;                //The score counter, the index corresponds to the player number (i.e. index 0 means player 1)
 	private int winner;									//The number of the player that has won
 	private string[] buttonNames;       //The names of the buttons the player has (should be changed later)
 	private bool gameOver;
 	private bool debug;
+	
 
 	void Awake()
 	{
@@ -63,9 +77,9 @@ public class TreeGameScript : MonoBehaviour {
 		}
 		score = new int[scoreDisplays.Count];
 
-		currentImage = new Image[nrOfPlayers];
+		image = new Image[nrOfPlayers];
 		//Get all the players image components
-		for (int i = 0; i < nrOfPlayers; currentImage[i] = scoreDisplays[i++].transform.GetChild(0).GetComponent<Image>()) ;
+		for (int i = 0; i < nrOfPlayers; image[i] = scoreDisplays[i++].transform.GetChild(0).GetComponent<Image>()) ;
 
 		if (randomizeButton)
 		{
@@ -76,16 +90,19 @@ public class TreeGameScript : MonoBehaviour {
 			buttonToPress.text = string.Format("Press: {0} button", buttonNames[buttonNr]);
 		}
 
-
+		if (randomizeWinScore)
+		{
+			winScore = Random.Range(winScoreInterval.x, winScoreInterval.y);
+			treeStage2 = (winScore / 2);		//Second stage is after half the cuts
+			treeStage3 = (int)((3f / 4) * winScore);	//Third stage is after 3/4 of the cuts
+		}
 	}
 
-	// Use this for initialization
 	void Start () {
 		gameOver = false;
 		debug = true;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (!gameOver)
 		{
@@ -112,6 +129,13 @@ public class TreeGameScript : MonoBehaviour {
 				GiveScore(playerID);
 			}
 		}
+		else
+		{
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				SceneManager.LoadScene("ResultsLocal");
+			}
+		}
 	}
 	void GiveScore(int playerID)
 	{
@@ -120,19 +144,19 @@ public class TreeGameScript : MonoBehaviour {
 		scoreDisplays[playerID].text = string.Format("{0} score: {1}", names[playerID], score[playerID]);
 		if (score[playerID] == treeStage2)
 		{
-			//TODO: Update the image of the tree to stage 2
-			currentImage[playerID] = trees[1];
+			//Update the image of the tree to stage 2
+			image[playerID].sprite = treeSprites[1];
 		}
 		else if (score[playerID] == treeStage3)
 		{
-			//TODO: Update the image of the tree to stage 3
-			currentImage[playerID] = trees[2];
+			//Update the image of the tree to stage 3
+			image[playerID].sprite = treeSprites[2];
 		}
 		else if (score[playerID] >= winScore)
 		{
 			//This player has won
 			//Set image to broken tree
-			currentImage[playerID] = trees[3];
+			image[playerID].sprite = treeSprites[3];
 			winner = playerID;
 			GameFinished();
 		}
@@ -143,7 +167,7 @@ public class TreeGameScript : MonoBehaviour {
 	{
 		//Announce the winner and go to the global/local score screen
 		gameOver = true;
-		buttonToPress.text = string.Format("{0} won!", names[winner]);
+		buttonToPress.text = string.Format("{0} won! \nPress \"Enter\" to continue", names[winner]);
 		//Give the winner score
 		switch (winner)
 		{
@@ -160,7 +184,14 @@ public class TreeGameScript : MonoBehaviour {
 				GlobalVariables.lastGameScoreP4 = award;
 				break;
 		}
-		Time.timeScale = 0;
+		StartCoroutine(LoadLevelAfterDelay());
 	}
+
+	IEnumerator LoadLevelAfterDelay()
+	{
+		yield return new WaitForSeconds(delay);
+		//Load the game roulette screen for starting a new game
+		SceneManager.LoadScene("GameRoulette");
+	}
+
 }
- 
