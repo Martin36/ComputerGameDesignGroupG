@@ -19,7 +19,7 @@ public class TreeGameScript : MonoBehaviour {
 		}
 	}
 
-
+	public GameObject explosion;
 	public Sprite[] treeSprites = new Sprite[4];
 	public IntVector2 winScoreInterval = new IntVector2(10, 40);
 	public bool randomizeButton = false;    //If true then randomize the button to press
@@ -29,9 +29,10 @@ public class TreeGameScript : MonoBehaviour {
 	public int treeStage3 = 15;         //Same as the above but another image
 	public int nrOfPlayers = 4;
 	public int award = 5;               //How many points the winner gets (all the others gets 0)
-	public int delay = 5;								//How many seconds before the next screen is auto loaded
+	public int delay = 5;               //How many seconds before the next screen is auto loaded
 
 
+	private GameObject[] players;
 	private List<Text> scoreDisplays;   //The text boxes to display the score each player has
 	private List<string> names;					//The names of the players
 	private Text buttonToPress;         //The text where is says which button to press
@@ -59,6 +60,16 @@ public class TreeGameScript : MonoBehaviour {
 		controllers[GlobalVariables.controllerP3] = 2;
 		controllers[GlobalVariables.controllerP4] = 3;
 
+		players = new GameObject[nrOfPlayers];
+		//Get all the player objects
+		int playerCounter = 0;
+		foreach (Transform child in transform)
+		{
+			if (child.tag.Equals("Player"))
+			{
+				players[playerCounter++] = child.gameObject;
+			}
+		}
 
 		buttonToPress = GameObject.FindGameObjectWithTag("ButtonPress").GetComponent<Text>();
 
@@ -158,9 +169,26 @@ public class TreeGameScript : MonoBehaviour {
 			//Set image to broken tree
 			image[playerID].sprite = treeSprites[3];
 			winner = playerID;
+			//Make the other players explode
+			for(int i = 0; i < nrOfPlayers; i++)
+			{
+				if(i != winner)
+				{
+					Explode(i);
+				}
+			}
 			GameFinished();
 		}
 
+	}
+
+	void Explode(int playerID)
+	{
+		if (players[playerID] != null)
+		{
+			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
+			Destroy(players[playerID]);
+		}
 	}
 
 	void GameFinished()

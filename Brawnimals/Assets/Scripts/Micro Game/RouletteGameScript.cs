@@ -15,7 +15,8 @@ public class RouletteGameScript : MonoBehaviour {
 	public Vector2 shootingRange;			//The interval in which the bullet hits the player (angle 100 is 0)
 	public int nrOfPlayers = 4;
 	public float rotationSpeed = 10;    //The rotation speed of the gun (degrees/sec)
-	public float rotationAcc = 5;			//The acceleration of the wheel
+	public float rotationAcc = 5;     //The acceleration of the wheel
+	public bool useSound = true;			//Set this true if sound should be enabled
 
 	private GameObject[] players;
 	private GameObject[] guns;    //The rotating roulette weels

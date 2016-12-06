@@ -14,6 +14,7 @@ public class BloodBalloonScript : MonoBehaviour {
 	public int scoreInterval = 5;			//The range between the scores, so for 5 means (5, 10, 15, 20) points
 	public float growingSpeed = 2; //The speed in which the balloon grows (should be used to scale the image)
 
+
 	private GameObject balloon;
 	private GameObject[] players;
 	private Text infoText;
