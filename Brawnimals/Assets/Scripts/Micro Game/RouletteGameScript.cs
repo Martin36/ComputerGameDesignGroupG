@@ -12,7 +12,9 @@ using System.Linq;
 public class RouletteGameScript : MonoBehaviour {
 
 	public GameObject explosion;
-	public Vector2 shootingRange;			//The interval in which the bullet hits the player (angle 100 is 0)
+	public Vector2 shootingRange;     //The interval in which the bullet hits the player (angle 100 is 0)
+	public AudioClip shotSound;
+	public AudioClip explosionSound;
 	public int nrOfPlayers = 4;
 	public float rotationSpeed = 10;    //The rotation speed of the gun (degrees/sec)
 	public float rotationAcc = 5;     //The acceleration of the wheel
@@ -22,6 +24,7 @@ public class RouletteGameScript : MonoBehaviour {
 	private GameObject[] guns;    //The rotating roulette weels
 	private Text[] scoreDisplays; //Text objects to display the score
 	private Text infoText;
+	private AudioSource source;
 	private int[] scores;     //Scores for each player
 	private int[] controllers;  //The index corresponds to the controller and the value is the player number
 	private int playersLeft;
@@ -41,7 +44,7 @@ public class RouletteGameScript : MonoBehaviour {
 				players[playerCounter++] = child.gameObject;
 			}
 		}
-
+		
 		guns = new GameObject[nrOfPlayers];
 		scoreDisplays = new Text[nrOfPlayers];
 		//Get the gun component and give it a random rotation
@@ -65,6 +68,8 @@ public class RouletteGameScript : MonoBehaviour {
 		controllers[GlobalVariables.controllerP2] = 1;
 		controllers[GlobalVariables.controllerP3] = 2;
 		controllers[GlobalVariables.controllerP4] = 3;
+
+		source = GetComponent<AudioSource>();
 
 		playersLeft = nrOfPlayers;
 		gameOver = false;
@@ -137,6 +142,11 @@ public class RouletteGameScript : MonoBehaviour {
 		//Check if player still alive
 		if (gun)
 		{
+			//Play shooting sound
+			if (useSound)
+			{
+				source.PlayOneShot(shotSound);
+			}
 			//Check if the shot was fired in the right interval
 			if (gun.transform.rotation.eulerAngles.z <= shootingRange.y && gun.transform.rotation.eulerAngles.z >= shootingRange.x)
 			{
@@ -153,9 +163,13 @@ public class RouletteGameScript : MonoBehaviour {
 
 	void Explode(int playerID)
 	{
-		//TODO: Add some animation for the player exploding
 		if (players[playerID] != null)
 		{
+			//Play explosion sound
+			if (useSound)
+			{
+				source.PlayOneShot(explosionSound);
+			}
 			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
 			scoreDisplays[playerID].transform.SetParent(transform); //Remove the player as parent to keep the score display
 			Destroy(players[playerID]);
