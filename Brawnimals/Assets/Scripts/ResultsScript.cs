@@ -64,8 +64,6 @@ public class ResultsScript : MonoBehaviour {
 	}
 
 	void Start () {
-		//Set the amount of blood to 0
-		//for (int i = 0; i < nrOfPlayers; blood[i++].fillAmount = 0f) ; 
 
 		//Set the score text
 		for(int i = 0; i < nrOfPlayers; i++)

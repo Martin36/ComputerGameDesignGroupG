@@ -20,10 +20,10 @@ public class GlobalVariables : MonoBehaviour {
 	public static int globalScoreP4 = 0;
 
 	//Last game scores for players
-	public static int lastGameScoreP1 = 73;
-	public static int lastGameScoreP2 = 65;
-	public static int lastGameScoreP3 = 50;
-	public static int lastGameScoreP4 = 15;
+	public static int lastGameScoreP1 = 0;
+	public static int lastGameScoreP2 = 0;
+	public static int lastGameScoreP3 = 0;
+	public static int lastGameScoreP4 = 0;
 
 	public static int gameID=10;//number of the scene
 
