@@ -115,12 +115,14 @@ public class TreeGameScript : MonoBehaviour {
 		source = GetComponent<AudioSource>();
 	}
 
-	void Start () {
+	void Start ()
+	{
 		gameOver = false;
 		debug = true;
 	}
-	
-	void Update () {
+
+	void Update ()
+	{
 		if (!gameOver)
 		{
 			//Check for which buttons has been pressed and give players score accordingly

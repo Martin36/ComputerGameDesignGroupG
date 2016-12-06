@@ -8,16 +8,19 @@ public class BloodBalloonScript : MonoBehaviour {
 	//The player that presses any button first when the balloon explodes is the winner
 
 	public GameObject explosion;
+	public AudioClip explosionSound;
+	public AudioClip winningSound;
 	public int maxTime = 10;   //The max time for the balloon to explode, in sec
 	public int minTime = 3;   //The min time for the balloon to explode
 	public int nrOfPlayers = 4;
 	public int scoreInterval = 5;			//The range between the scores, so for 5 means (5, 10, 15, 20) points
 	public float growingSpeed = 2; //The speed in which the balloon grows (should be used to scale the image)
-
+	public bool useSound = true;
 
 	private GameObject balloon;
 	private GameObject[] players;
 	private Text infoText;
+	private AudioSource source;
 	private bool exploded;    //True when the balloon has exploded
 	private bool debug;       //True if trying out the code (without the gamepad)
 	private bool gameOver;
@@ -65,9 +68,9 @@ public class BloodBalloonScript : MonoBehaviour {
 		//Scale the explosion
 		explosion.transform.localScale = new Vector3(40, 40, 40);
 
+		source = GetComponent<AudioSource>();
 	}
 
-	// Update is called once per frame
 	void Update () {
 		if (!gameOver)
 		{
@@ -85,8 +88,12 @@ public class BloodBalloonScript : MonoBehaviour {
 			//Do the check for when the balloon should explode
 			if (growthTime <= 0 && !exploded)
 			{
+				//Play the sound 
+				if (useSound)
+				{
+					source.PlayOneShot(explosionSound);
+				}
 				//Then the balloon explodes
-				//TODO: Add code for making the balloon explode
 				Destroy(balloon);
 				Instantiate(explosion, new Vector3(0, 0, -2), Quaternion.Euler(90, 0, 0));
 				exploded = true;
@@ -170,12 +177,16 @@ public class BloodBalloonScript : MonoBehaviour {
 	/// <param name="playerID"></param>
 	void ReachedGoal(int playerID)
 	{
-		//TODO: Have to check if the player is still alive
 		if(players[playerID] != null)
 		{
 			//Give the player the correct position
 			place[playerID] = ++placeCounter;
 			playersLeft -= 1;
+			//Play winning sound
+			if (useSound)
+			{
+				source.PlayOneShot(winningSound);
+			}
 			//Destroy the player
 			Destroy(players[playerID]);
 		}
@@ -188,6 +199,10 @@ public class BloodBalloonScript : MonoBehaviour {
 	{
 		if(players[playerID] != null)
 		{
+			if (useSound)
+			{
+				source.PlayOneShot(explosionSound);
+			}
 			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
 			Destroy(players[playerID]);
 			place[playerID] = "Disqualified";

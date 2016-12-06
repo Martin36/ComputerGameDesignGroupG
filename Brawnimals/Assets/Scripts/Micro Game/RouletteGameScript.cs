@@ -33,7 +33,8 @@ public class RouletteGameScript : MonoBehaviour {
 	private bool startFinished;
 
 
-	void Start () {
+	void Awake()
+	{
 		players = new GameObject[nrOfPlayers];
 		//Get all the player objects
 		int playerCounter = 0;
@@ -44,7 +45,7 @@ public class RouletteGameScript : MonoBehaviour {
 				players[playerCounter++] = child.gameObject;
 			}
 		}
-		
+
 		guns = new GameObject[nrOfPlayers];
 		scoreDisplays = new Text[nrOfPlayers];
 		//Get the gun component and give it a random rotation
@@ -71,10 +72,14 @@ public class RouletteGameScript : MonoBehaviour {
 
 		source = GetComponent<AudioSource>();
 
-		playersLeft = nrOfPlayers;
-		gameOver = false;
-		debug = true;
-		startFinished = true;
+	}
+	void Start()
+	{
+			playersLeft = nrOfPlayers;
+			gameOver = false;
+			debug = true;
+			startFinished = true;
+		
 	}
 
 	void Update () {
