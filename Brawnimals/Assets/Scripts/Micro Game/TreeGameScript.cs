@@ -22,8 +22,11 @@ public class TreeGameScript : MonoBehaviour {
 	public GameObject explosion;
 	public Sprite[] treeSprites = new Sprite[4];
 	public IntVector2 winScoreInterval = new IntVector2(10, 40);
+	public AudioClip shopSound;
+	public AudioClip explosionSound;
 	public bool randomizeButton = false;    //If true then randomize the button to press
 	public bool randomizeWinScore = true;
+	public bool useSound = true;
 	public int winScore = 20;          //The number of times to press the button before the tree breaks
 	public int treeStage2 = 10;					//When the number of hits equals this number the image for the tree will change
 	public int treeStage3 = 15;         //Same as the above but another image
@@ -33,6 +36,7 @@ public class TreeGameScript : MonoBehaviour {
 
 
 	private GameObject[] players;
+	private AudioSource source;
 	private List<Text> scoreDisplays;   //The text boxes to display the score each player has
 	private List<string> names;					//The names of the players
 	private Text buttonToPress;         //The text where is says which button to press
@@ -107,6 +111,8 @@ public class TreeGameScript : MonoBehaviour {
 			treeStage2 = (winScore / 2);		//Second stage is after half the cuts
 			treeStage3 = (int)((3f / 4) * winScore);	//Third stage is after 3/4 of the cuts
 		}
+
+		source = GetComponent<AudioSource>();
 	}
 
 	void Start () {
@@ -151,6 +157,12 @@ public class TreeGameScript : MonoBehaviour {
 	void GiveScore(int playerID)
 	{
 		score[playerID] += 1;
+		//Play shop sound
+		if (useSound)
+		{
+			source.PlayOneShot(shopSound);
+		}
+
 		//Update score text (need to add 1 to playerID because of the indexing)
 		scoreDisplays[playerID].text = string.Format("{0} score: {1}", names[playerID], score[playerID]);
 		if (score[playerID] == treeStage2)
@@ -186,6 +198,11 @@ public class TreeGameScript : MonoBehaviour {
 	{
 		if (players[playerID] != null)
 		{
+			//Play explosion sound
+			if (useSound)
+			{
+				source.PlayOneShot(explosionSound);
+			}
 			Instantiate(explosion, players[playerID].transform.position, Quaternion.Euler(90, 0, 0));
 			Destroy(players[playerID]);
 		}
