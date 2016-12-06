@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class Level1Spikes : MonoBehaviour
+public class LevelItems : MonoBehaviour
 {
 
 	public float levelTimer;

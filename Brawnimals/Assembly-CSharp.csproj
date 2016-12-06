@@ -49,12 +49,16 @@
      <Compile Include="Assets\Scripts\ChangeGravity.cs" />
      <Compile Include="Assets\Scripts\CharacterColliders.cs" />
      <Compile Include="Assets\Scripts\CharacterControls.cs" />
+     <Compile Include="Assets\Scripts\ColliderItems.cs" />
      <Compile Include="Assets\Scripts\ControllerRoulette.cs" />
      <Compile Include="Assets\Scripts\Explosion2D.cs" />
      <Compile Include="Assets\Scripts\ExplosionGenerator.cs" />
      <Compile Include="Assets\Scripts\GlobalVariables.cs" />
      <Compile Include="Assets\Scripts\ItemsGeneration.cs" />
      <Compile Include="Assets\Scripts\Level1Spikes.cs" />
+     <Compile Include="Assets\Scripts\Level1SpikesHardcore.cs" />
+     <Compile Include="Assets\Scripts\LevelGravity.cs" />
+     <Compile Include="Assets\Scripts\LevelItems.cs" />
      <Compile Include="Assets\Scripts\Micro Game\BloodBalloonScript.cs" />
      <Compile Include="Assets\Scripts\Micro Game\RouletteGameScript.cs" />
      <Compile Include="Assets\Scripts\Micro Game\TreeGameScript.cs" />
@@ -66,6 +70,7 @@
      <Compile Include="Assets\Scripts\SpikeCreator.cs" />
      <Compile Include="Assets\Scripts\StartMenu.cs" />
      <Compile Include="Assets\Scripts\StartSceneMain.cs" />
+     <Compile Include="Assets\Scripts\TimeScaleReset.cs" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

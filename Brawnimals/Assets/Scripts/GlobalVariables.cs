@@ -25,6 +25,8 @@ public class GlobalVariables : MonoBehaviour {
 	public static int lastGameScoreP3 = 50;
 	public static int lastGameScoreP4 = 15;
 
+	public static int gameID=10;//number of the scene
+
 	//Variable to control the change of spawning a new Microgame, should be reset after a microgame spawned
 	public static int microGameChance = 0;
 

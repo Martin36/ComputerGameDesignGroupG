@@ -3,9 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
-public class Level1Spikes : MonoBehaviour
-{
+public class LevelGravity : MonoBehaviour {
 
 	public float levelTimer;
 	public Button exitButton;

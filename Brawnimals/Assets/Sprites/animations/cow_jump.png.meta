@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: d474f42b8eb3c8a40be48f5c4ea7dab3
-timeCreated: 1480961613
+timeCreated: 1481036501
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: cow_jump_0
+    21300002: cow_jump_1
+    21300004: cow_jump_2
+    21300006: cow_jump_3
+    21300008: cow_jump_4
+    21300010: cow_jump_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +36,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +44,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,7 +57,85 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: cow_jump_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 154
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cow_jump_1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 0
+        width: 143
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cow_jump_2
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 0
+        width: 143
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cow_jump_3
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 0
+        width: 143
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cow_jump_4
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 0
+        width: 165
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: cow_jump_5
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 0
+        width: 239
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
