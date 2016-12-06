@@ -170,7 +170,7 @@ public class RouletteGameScript : MonoBehaviour {
 		GlobalVariables.lastGameScoreP2 = scores[1];
 		GlobalVariables.lastGameScoreP3 = scores[2];
 		GlobalVariables.lastGameScoreP4 = scores[3];
-		if (debug)
+		if (!debug)
 		{
 			GlobalVariables.lastGameScoreP1 = 75;
 			GlobalVariables.lastGameScoreP2 = 50;

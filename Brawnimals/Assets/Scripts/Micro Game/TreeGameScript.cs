@@ -191,7 +191,7 @@ public class TreeGameScript : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(delay);
 		//Load the game roulette screen for starting a new game
-		SceneManager.LoadScene("GameRoulette");
+		SceneManager.LoadScene("ResultsLocal");
 	}
 
 }
