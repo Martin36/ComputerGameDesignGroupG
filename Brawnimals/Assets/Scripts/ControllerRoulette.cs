@@ -33,7 +33,7 @@ public class ControllerRoulette : MonoBehaviour {
 		if (stopped) {
 			space.text = "Press Space \n to continue"; 
 			if(Input.GetKeyDown(KeyCode.Space)){
-				SceneManager.LoadScene(10, LoadSceneMode.Single);
+				SceneManager.LoadScene(GlobalVariables.numScene, LoadSceneMode.Single);
 			}
 		}
 			

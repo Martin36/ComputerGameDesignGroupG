@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\CharacterControls.cs" />
      <Compile Include="Assets\Scripts\ColliderItems.cs" />
      <Compile Include="Assets\Scripts\ControllerRoulette.cs" />
+     <Compile Include="Assets\Scripts\Countdown.cs" />
      <Compile Include="Assets\Scripts\Explosion2D.cs" />
      <Compile Include="Assets\Scripts\ExplosionGenerator.cs" />
      <Compile Include="Assets\Scripts\GlobalVariables.cs" />

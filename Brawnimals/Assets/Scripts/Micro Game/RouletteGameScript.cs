@@ -133,6 +133,7 @@ public class RouletteGameScript : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(KeyCode.Return))
 			{
+				GlobalVariables.globalScores = false;
 				SceneManager.LoadScene("ResultsLocal");
 			}
 		}

@@ -10,7 +10,7 @@ public class ResultsScript : MonoBehaviour {
 	public int maxLocalScore = 100;
 	public int maxGlobalScore = 500;
 	public int fillTime = 5;
-	public int delay = 6;			//The time before next scene is loaded
+	public int delay = 10;			//The time before next scene is loaded
 	public bool globalScore = false;		//Set this true if the global score is needed
 	
 

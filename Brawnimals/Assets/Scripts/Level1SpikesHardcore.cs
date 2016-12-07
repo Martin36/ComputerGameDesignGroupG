@@ -40,7 +40,7 @@ public class Level1SpikesHardcore : MonoBehaviour
 		if (GlobalVariables.numPlayers == 0)
 		{
 			Time.timeScale = 0.0f;
-			textWin.text = "Player 4 Wins!";
+			textWin.text = "Game Over";
 			textWin.gameObject.SetActive(true);
 			exitButton.gameObject.SetActive(true);
 		}
@@ -52,7 +52,7 @@ public class Level1SpikesHardcore : MonoBehaviour
 		yield return new WaitForSeconds(levelTimer);
 		Time.timeScale = 0.0f;
 		exitButton.gameObject.SetActive(true);
-		textWin.text = "Player 4 Lost!";
+		textWin.text = "Game Over";
 		textWin.gameObject.SetActive(true);
 
 	}
@@ -60,7 +60,7 @@ public class Level1SpikesHardcore : MonoBehaviour
 	public void exitLevel()
 	{
 		Time.timeScale = 1.0f;
-		SceneManager.LoadScene(0, LoadSceneMode.Single);
+		SceneManager.LoadScene(4, LoadSceneMode.Single);
 	}
 
 	void checkControllers(){

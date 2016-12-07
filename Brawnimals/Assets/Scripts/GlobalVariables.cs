@@ -5,7 +5,10 @@ public class GlobalVariables : MonoBehaviour {
 
 
 	//the number of players "alive" on the game, be care if you modify that variable, I do in some games. Before every game should be reset it properly
-	public static int numPlayers=9;
+	public static int numPlayers=12;
+
+	//numberOfLevel that have to be load
+	public static int numScene=0;
 
 	//to know which controller pertain to each player 0 = wasd, 1 = Arrows, 2 = Gamepad, 3 = Mouse
 	public static int controllerP1 = 0;    //Chicken player

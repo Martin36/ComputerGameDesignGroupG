@@ -28,7 +28,7 @@ public class LevelItems : MonoBehaviour
 		if (GlobalVariables.numPlayers == 0)
 		{
 			Time.timeScale = 0.0f;
-			textWin.text = "Time's UP";
+			textWin.text = "Game Over";
 			textWin.gameObject.SetActive(true);
 			exitButton.gameObject.SetActive(true);
 		}
@@ -40,7 +40,7 @@ public class LevelItems : MonoBehaviour
 		yield return new WaitForSeconds(levelTimer);
 		Time.timeScale = 0.0f;
 		exitButton.gameObject.SetActive(true);
-		textWin.text = "Time's UP";
+		textWin.text = "Game Over";
 		textWin.gameObject.SetActive(true);
 
 	}
