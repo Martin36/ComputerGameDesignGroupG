@@ -78,10 +78,10 @@ public class Level1SpikesHardcore : MonoBehaviour
 			sheep1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
 			sheep2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
 			sheep3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
-			cow.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; //thats the gamepad in the other script
-			cow1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; //thats the gamepad in the other script
-			cow2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; //thats the gamepad in the other script
-			cow3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; //thats the gamepad in the other script
+			cow.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; //thats the gamepad in the other script
+			cow1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; //thats the gamepad in the other script
+			cow2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; //thats the gamepad in the other script
+			cow3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; //thats the gamepad in the other script
 			Destroy (mouse);
 			Destroy (mouse1);
 			Destroy (mouse2);
@@ -95,10 +95,10 @@ public class Level1SpikesHardcore : MonoBehaviour
 			chicken1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
 			chicken2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
 			chicken3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 2;
-			sheep.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			sheep1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			sheep2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			sheep3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
+			sheep.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			sheep1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			sheep2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			sheep3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
 			mouse.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1; 
 			mouse1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1; 
 			mouse2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1; 
@@ -111,10 +111,10 @@ public class Level1SpikesHardcore : MonoBehaviour
 		}
 		//means that the chicken use the awsd
 		if (GlobalVariables.controllerP1 == 2) {
-			chicken.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			chicken1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			chicken2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
-			chicken3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3;
+			chicken.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			chicken1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			chicken2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
+			chicken3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4;
 			cow.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
 			cow1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
 			cow2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
@@ -139,10 +139,10 @@ public class Level1SpikesHardcore : MonoBehaviour
 			sheep1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
 			sheep2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
 			sheep3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 1;
-			mouse.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; 
-			mouse1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; 
-			mouse2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; 
-			mouse3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 3; 
+			mouse.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; 
+			mouse1.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; 
+			mouse2.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; 
+			mouse3.GetComponent<UnityStandardAssets._2D.Platformer2DUserControl> ().playerID = 4; 
 			Destroy (chicken);
 			Destroy (chicken1);
 			Destroy (chicken2);
